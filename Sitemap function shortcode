@@ -1,0 +1,18 @@
+function generate_sitemap() {
+    $sitemap = '<ul>';
+    $args = array(
+        'post_type' => 'page',
+        'post_status' => 'publish'
+    );
+    $pages = get_pages($args);
+
+    foreach ($pages as $page) {
+        $sitemap .= '<li><a class="sitemap-links" href="' . get_page_link($page->ID) . '">' . $page->post_title . '</a></li>';
+    }
+
+    $sitemap .= '</ul>';
+
+    return $sitemap;
+}
+add_shortcode('Sitemap_List', 'generate_sitemap');
+
